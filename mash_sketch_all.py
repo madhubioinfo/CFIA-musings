@@ -102,5 +102,5 @@ with open(output_dir + 'final_sketches.msh', 'wb') as outfile:
             outfile.write(infile.read())
 
 # Remove the individual output files
-#for filename in output_files:
+for filename in output_files:
   subprocess.run(['rm', '-f', filename], check=True)
