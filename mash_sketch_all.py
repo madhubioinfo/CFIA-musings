@@ -94,13 +94,19 @@ for i, file_group in enumerate(file_groups10):
     output_path = output_dir + f'part_10_{i}.msh'
     subprocess.run([mash_path, 'sketch', '-o', output_path, '-p', str(num_processors)] + file_group, check=True)
 ########################################################################################################################
-# concatenate the output files into a single file
-output_files = glob.glob(output_dir + 'part_*.msh')
-with open(output_dir + 'final_sketches.msh', 'wb') as outfile:
-    for filename in output_files:
-        with open(filename, 'rb') as infile:
-            outfile.write(infile.read())
+# get a list of all temporary Mash sketches
+temp_files = [f for f in os.listdir(output_dir) if f.startswith('part')]
 
-# Remove the individual output files
-for filename in output_files:
-  subprocess.run(['rm', '-f', filename], check=True)
+# write the list of temp* files to list.txt
+with open(output_dir + 'list.txt', 'w') as f:
+    for file in temp_files:
+        f.write(output_dir + file + '\n')
+
+
+# run the Mash paste command
+if os.path.exists(output_dir + 'final_sketch.msh'):
+    os.rename(output_dir + 'final_sketch.msh', output_dir + 'final_sketch_old.msh')
+subprocess.run([mash_path, 'paste',  output_dir + 'final_sketch.msh', '-l', output_dir + 'list.txt'], check=True)
+# delete temporary files
+for temp_file in temp_files:
+    os.remove(os.path.join(output_dir, temp_file))
