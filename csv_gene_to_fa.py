@@ -1,11 +1,12 @@
-# Specify the file paths for input and output
+# # Specifying the input file paths for csv geneseekr output as input and output file wanted to stdout
+
 input_file_path = "test.csv"
 output_file_path = "output.fasta"
 
-# Define the gene names you want to filter
+# Defining the names of genes to search for
 genes_to_include = ["stx1", "stx2"]
 
-# Open the input file and the output file
+# Opening the given file paths
 with open(input_file_path, "r") as input_file, open(output_file_path, "w") as output_file:
     lines = input_file.readlines()
     
@@ -20,5 +21,5 @@ with open(input_file_path, "r") as input_file, open(output_file_path, "w") as ou
                 sequence = columns[6]
                 output_file.write(f"{header}\n{sequence}\n")
 
-print(f"Filtered FASTA output has been written to {output_file_path}")
+print(f"stx1 and stx2 fasta output is here {output_file_path}")
 
