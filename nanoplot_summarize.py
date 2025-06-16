@@ -10,8 +10,11 @@ fields_to_extract = {
     "Number of reads": "Num Reads",
     "Mean read length": "Mean Length",
     "Read length N50": "N50",
-    "Longest read": "Max Length",
-    "Mean basecall quality": "Mean Q Score"
+#    "Longest read": "Max Length",
+    "Mean read quality": "Mean quality",
+    "Median read length": "Median length",
+    "Median read quality": "Median quality",
+    "Total bases": "total baseS"
 }
 
 # Initialize CSV data
