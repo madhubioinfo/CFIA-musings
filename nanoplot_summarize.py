@@ -7,14 +7,14 @@ output_csv = "NanoPlot_summary.csv"
 
 # Define the columns you want to extract from each NanoStats.txt
 fields_to_extract = {
-    "Number of reads": "Num Reads",
-    "Mean read length": "Mean Length",
+    "Number of reads": "Num_Reads",
+    "Mean read length": "Mean_read_length",
     "Read length N50": "N50",
 #    "Longest read": "Max Length",
-    "Mean read quality": "Mean quality",
-    "Median read length": "Median length",
-    "Median read quality": "Median quality",
-    "Total bases": "total baseS"
+    "Mean read quality": "Mean_quality",
+    "Median read length": "Median_length",
+    "Median read quality": "Median_quality",
+    "Total bases": "total_bases"
 }
 
 # Initialize CSV data
