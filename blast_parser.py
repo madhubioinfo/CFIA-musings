@@ -1,6 +1,6 @@
 import csv
 
-input_file = "extracted_sequences_nt_blast.tsv"
+input_file = "blast_results.tsv"
 output_file = "best_blasthits.tsv"
 
 # Dictionary to store best hit per query
@@ -10,6 +10,8 @@ with open(input_file, newline='') as infile:
     reader = csv.reader(infile, delimiter='\t')
     header = next(reader)  # store the header
     for row in reader:
+        if len(row) < 17:  # skip rows with not enough columns
+            continue
         query_id = row[0]
         evalue = float(row[5])
         bit_score = float(row[6])
@@ -26,7 +28,12 @@ with open(input_file, newline='') as infile:
 # Write best hits to file
 with open(output_file, 'w', newline='') as outfile:
     writer = csv.writer(outfile, delimiter='\t')
+    # Custom header as requested
+    writer.writerow([
+        "qseqid", "sseqid", "nident", "mismatch", "gaps", "evalue", "bitscore", "qlen", "slen", "length", 
+        "qstart", "qend", "sstart", "send", "pident", "qseq", "sseq"
+    ])
+    # Original BLAST header (from the input file)
     writer.writerow(header)
     for row in best_hits.values():
         writer.writerow(row)
-
